@@ -1,9 +1,8 @@
 import { registerRootComponent } from 'expo';
-import React, { useState, useEffect, useRef } from 'react';
-import * as MediaLibrary from "expo-media-library";
-import * as Permissions from "expo-permissions";
+import React, { useState, useRef } from 'react';
 import { StyleSheet, View, SafeAreaView, Alert, StatusBar, Platform, Image } from 'react-native';
 import { Camera } from "expo-camera";
+import * as MediaLibrary from "expo-media-library";
 import * as ImagePicker from 'expo-image-picker';
 import { LandingView } from './components/landing-view';
 import { CameraView } from './components/camera-view';

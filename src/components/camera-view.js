@@ -6,19 +6,19 @@ import TakePicker from '../icons/take-picture.svg';
 export function CameraView({ Camera, camRef, handleCapture }) {
     const [type, setType] = useState(Camera.Constants.Type.back);
 
+    const handleCameraFlip = () => {
+        const isUsingBackCamera = type === Camera.Constants.Type.back;
+        const cameraType = isUsingBackCamera ? Camera.Constants.Type.front : Camera.Constants.Type.back;
+        setType(cameraType);
+    }
+
     return (
         <View style={styles.wrap}>
             <Camera ref={camRef} style={styles.camera} type={type}>
                 <View style={styles.buttonsContainer}>
                     <Pressable
                         style={styles.flipCameraButton}
-                        onPress={() => {
-                            setType(
-                            type === Camera.Constants.Type.back
-                                ? Camera.Constants.Type.front
-                                : Camera.Constants.Type.back
-                            );
-                        }}
+                        onPress={handleCameraFlip}
                     >
                         <FlipCamera />
                     </Pressable>
