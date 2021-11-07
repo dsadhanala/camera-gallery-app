@@ -39,8 +39,10 @@ export function App() {
 }
 
   const handleSave = async (photo) => {
-      const { status } = await Camera.requestCameraPermissionsAsync(Permissions.MEDIA_LIBRARY);
-      if (status !== "granted") return Alert.alert('Please allow access to save the picture!');
+
+      const { status: MediaLibraryStatus } = await MediaLibrary.requestPermissionsAsync();
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      if (MediaLibraryStatus !== "granted" || status !== "granted") return Alert.alert('Please allow access to save the picture!');
       const assert = await MediaLibrary.createAssetAsync(photo);
       await MediaLibrary.createAlbumAsync('DU class app', assert);
   };
@@ -81,11 +83,11 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ffffff',
   },
   container: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ffffff',
   }
 });
 

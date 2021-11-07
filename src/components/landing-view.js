@@ -2,21 +2,19 @@ import React from 'react';
 import { StyleSheet, View, Pressable, Text, Image } from 'react-native';
 import LaunchCameraIcon from '../icons/launch-camera.svg';
 import GalleryIcon from '../icons/gallery.svg';
+import placeholderImage from '../assets/app_landing.jpeg';
 
 export function LandingView({ handleOpenCamera, handleOpenGallery, previewImage }) {
     return (
         <View style={styles.wrap}>
-            {
-                previewImage && (
-                    <View style={styles.imagePreviewView}>
-                        <Text style={styles.imagePreviewLabel}>Image Preview</Text>
-                        <Image
-                            source={{ uri: previewImage }}
-                            style={styles.imagePreview}
-                        />
-                    </View>
-                )
-            }
+            <View style={styles.imagePreviewView}>
+                <Text style={styles.imagePreviewLabel}>Image Preview</Text>
+                <Image
+                    resize="contain"
+                    source={previewImage ? { uri: previewImage } : placeholderImage }
+                    style={previewImage ? styles.imagePreview :  styles.placeholderImage}
+                />
+            </View>
             <View style={styles.buttonsWrap}>
                 <View>
                     <Pressable onPress={handleOpenCamera} style={styles.launchCamera}>
@@ -71,5 +69,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
+    },
+    placeholderImage: {
+        width: 300,
+        height: 300
     }
 });
